@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -58,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean onMarkerClick(Marker marker) {
                         Toast.makeText(MainActivity.this, marker.getTitle().toString(), Toast.LENGTH_LONG).show();
+                        marker.showInfoWindow();
+                        marker.setVisible(true);
                         return true;
 
                     }
@@ -65,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
                 UiSettings ui = map.getUiSettings();
 
+                ui.setCompassEnabled(true);
                 ui.setZoomControlsEnabled(true);
 
                 LatLng poi_north = new LatLng(1.3613131, 103.8494639);
