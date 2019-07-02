@@ -9,7 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -23,7 +25,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MainActivity extends AppCompatActivity {
-    Button btnNorth, btnCentral, btnEast;
+    Spinner spin;
     private GoogleMap map;
 
     @Override
@@ -92,43 +94,32 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        spin = findViewById(R.id.spinner);
 
-
-        btnNorth = findViewById(R.id.btnNorth);
-        btnCentral = findViewById(R.id.btnCentral);
-        btnEast = findViewById(R.id.btnEast);
-
-        btnNorth.setOnClickListener(new View.OnClickListener() {
+        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                if (map != null){
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i==0){
+                    LatLng poi_center = new LatLng(1.3521, 103.8198);
+                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(poi_center, 11));
+                }else if (i==1){
                     LatLng poi_north = new LatLng(1.3613131, 103.8494639);
                     map.moveCamera(CameraUpdateFactory.newLatLngZoom(poi_north, 15));
-                }
-            }
-        });
-
-        btnCentral.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (map != null){
+                }else if (i==2){
                     LatLng poi_central = new LatLng(1.3140511, 103.8703913);
                     map.moveCamera(CameraUpdateFactory.newLatLngZoom(poi_central, 15));
-
-                }
-            }
-        });
-
-        btnEast.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (map != null){
+                }else if (i==3){
                     LatLng poi_east = new LatLng(1.4183039, 103.7898392);//block 555
                     map.moveCamera(CameraUpdateFactory.newLatLngZoom(poi_east, 15));
-
-
                 }
             }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
         });
+
+
     }
 }
