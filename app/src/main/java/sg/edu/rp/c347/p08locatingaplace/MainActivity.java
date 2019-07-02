@@ -52,7 +52,15 @@ public class MainActivity extends AppCompatActivity {
                                 "Tel:66776677\n")
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
-                
+                map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        Toast.makeText(MainActivity.this, marker.getTitle().toString(), Toast.LENGTH_LONG).show();
+                        return true;
+
+                    }
+                });
+
                 UiSettings ui = map.getUiSettings();
 
                 ui.setZoomControlsEnabled(true);
